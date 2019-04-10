@@ -78,8 +78,8 @@ oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 ### pyenv and pyenv-virtualenv config
 
 ```bash
-echo 'eval "$(pyenv init -)"' >> ~/.zshenv
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshenv
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 source ~/.zshenv
 ```
 
