@@ -80,8 +80,25 @@ oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 ```bash
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
-source ~/.zshenv
+source ~/.zshrc
 ```
+
+## Docker
+
+Download the latest [stable release](https://docs.docker.com/docker-for-mac/release-notes/) of Docker CE for Mac and copy it to `/Applications`. Launch Docker.app to complete installation.
+
+## Visual Studio Code
+
+Download [VS Code](https://code.visualstudio.com/Download) and extract it to `/Applications`
+
+Useful extensions:
+
+* Python (ms-python.python)
+* Dracula Official theme (dracula-theme.theme-dracula)
+* GitLens (eamodio.gitlens)
+* Git History (donjayamanne.githistory)
+* Docker (peterjausovec.vscode-docker)
+* markdownlint (davidanson.vscode-markdownlint)
 
 ## Programming Languages
 
