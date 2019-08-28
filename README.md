@@ -7,6 +7,10 @@ risk.
 
 ## Standalone Tools and Frameworks
 
+## iTerm 2
+
+Download [iTerm](https://iterm2.com/downloads.html) and extract it to `/Applications`
+
 ## Xcode Command Line Tools
 
 Install the Xcode Command Line Tools. When prompted, choose Install and Agree to the license agreement.
@@ -15,11 +19,33 @@ Install the Xcode Command Line Tools. When prompted, choose Install and Agree to
 xcode-select --install
 ```
 
-On macOS 10.14 Mojave, also install the headers. When prompted, enter your administrator password.
+In macOS 10.14 Mojave, headers are no longer installed into `/usr/include` by default. For programs that haven't been updated, Apple has provided a package to install the headers. **Don't install them unless a problem occurs later.** When prompted, enter your administrator password.
 
 ```bash
 sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 ```
+
+## git config
+
+```bash
+# Global git ignore
+echo ".DS_Store" >> ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
+
+# User info
+git config --global user.name "Firstname Lastname"
+git config --global user.email your_email@host.tld
+```
+
+### Oh My Zsh
+
+Install Oh My Zsh. When prompted, enter your user password.
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 
 ## Homebrew
 
@@ -51,10 +77,6 @@ pyenv [project](https://github.com/pyenv/pyenv)
 
 pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
 
-## iTerm 2
-
-Download [iTerm](https://iterm2.com/downloads.html) and extract it to `/Applications`
-
 ### Dracula Theme for iTerm
 
 Clone the Dracula repository and follow the [instructions](https://draculatheme.com/iterm/) to activate the theme in iTerm 2
@@ -64,16 +86,6 @@ mkdir ~/src
 cd ~/src
 git clone https://github.com/dracula/iterm.git
 ```
-
-### Oh My Zsh
-
-Install Oh My Zsh. When prompted, enter your user password.
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
-
-oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 
 ### pyenv and pyenv-virtualenv config
 
