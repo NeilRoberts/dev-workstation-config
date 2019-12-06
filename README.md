@@ -1,15 +1,9 @@
 # macOS Dev Workstation Configuration
 
-Notes on the applications and tools that I have installed on my Mac for
-non-Xcode development. While I have tried to maintain a logical ordering,
-some steps may appear earlier than their prerequisites. Follow at your own
-risk.
-
-## Standalone Tools and Frameworks
-
-## iTerm 2
-
-Download [iTerm](https://iterm2.com/downloads.html) and extract it to `/Applications`
+These are my notes on the applications and tools that I installed on my Mac for
+(primarily) non-Xcode development. For the most part, these steps are in
+chronological order, but YMMV. I've updated this document for my latest macOS
+Catalina (10.15.1) setup.
 
 ## Xcode Command Line Tools
 
@@ -19,25 +13,21 @@ Install the Xcode Command Line Tools. When prompted, choose Install and Agree to
 xcode-select --install
 ```
 
-In macOS 10.14 Mojave, headers are no longer installed into `/usr/include` by default. For programs that haven't been updated, Apple has provided a package to install the headers. **Don't install them unless a problem occurs later.** When prompted, enter your administrator password.
+## iTerm 2
+
+Download [iTerm](https://iterm2.com/downloads.html) and extract it to `/Applications`
+
+### Dracula Theme for iTerm
+
+Clone the Dracula repository and follow the [instructions](https://draculatheme.com/iterm/) to activate the theme in iTerm 2
 
 ```bash
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+mkdir ~/src
+cd ~/src
+git clone https://github.com/dracula/iterm.git
 ```
 
-## git config
-
-```bash
-# Global git ignore
-echo ".DS_Store" >> ~/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
-
-# User info
-git config --global user.name "Firstname Lastname"
-git config --global user.email your_email@host.tld
-```
-
-### Oh My Zsh
+## Oh My Zsh
 
 Install Oh My Zsh. When prompted, enter your user password.
 
@@ -55,44 +45,18 @@ oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 
 Homebrew [project](https://brew.sh)
 
-### git
+## git
 
 ```bash
 brew install git
-```
 
-### Maven
+# Global git ignore
+echo ".DS_Store" >> ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
 
-```bash
-brew install maven
-```
-
-### pyenv and pyenv-virtualenv
-
-```bash
-brew install pyenv pyenv-virtualenv
-```
-
-pyenv [project](https://github.com/pyenv/pyenv)
-
-pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
-
-### Dracula Theme for iTerm
-
-Clone the Dracula repository and follow the [instructions](https://draculatheme.com/iterm/) to activate the theme in iTerm 2
-
-```bash
-mkdir ~/src
-cd ~/src
-git clone https://github.com/dracula/iterm.git
-```
-
-### pyenv and pyenv-virtualenv config
-
-```bash
-echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
-source ~/.zshrc
+# User info
+git config --global user.name "Firstname Lastname"
+git config --global user.email your_email@host.tld
 ```
 
 ## Docker
@@ -105,56 +69,70 @@ Download [VS Code](https://code.visualstudio.com/Download) and extract it to `/A
 
 Useful extensions:
 
-* Python (ms-python.python)
+* Docker (ms-azuretools.vscode-docker)
 * Dracula Official theme (dracula-theme.theme-dracula)
-* GitLens (eamodio.gitlens)
 * Git History (donjayamanne.githistory)
-* Docker (peterjausovec.vscode-docker)
+* GitLens (eamodio.gitlens)
+* Go (ms-vscode.go)
 * markdownlint (davidanson.vscode-markdownlint)
+* Python (ms-python.python)
 
-## Programming Languages
+Follow the [instructions](https://draculatheme.com/visual-studio-code/) to activate the theme in VS Code
 
-### Python
-
-```bash
-pyenv install 3.7.3
-pyenv install 3.6.8
-pyenv install 2.7.16
-```
-
-#### Set the preferred order of Python versions:
+## Python
 
 ```bash
-pyenv global 3.7.3 3.6.8 2.7.16 system
+# Install pyenv and pyenv-virtualenv
+brew install pyenv pyenv-virtualenv
+
+# Configure pyenv and pyenv-virtualenv
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
+source ~/.zshrc
+
+# List the available Python versions
+pyenv install --list
+
+# Install the latest Python 3
+pyenv install 3.8.0
+
+# Set the preferred order of Python interpreters
+pyenv global 3.8.0 system
+
+# Create and activate a Python virtual environment
+pyenv virtualenv 3.8.0 sandbox-3.8.0
+pyenv activate sandbox-3.8.0
 ```
+
+pyenv [project](https://github.com/pyenv/pyenv)
+
+pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
 
 pyenv global [docs](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-global-advanced)
 
-#### Create and activate a virtualenv for Python 3.7
+## Ruby
 
 ```bash
-pyenv virtualenv 3.7.3 sandbox-3.7.3
-pyenv activate sandbox-3.7.3
-```
-
-### Ruby
-
-#### Ruby Version Manager (rvm)
-
-```bash
+# Install rvm
 curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+
+# List the available Ruby versions
+rvm list known
+
+# Install the latest Ruby
+rvm install ruby --latest
+
+# Install the Ruby documentation
+rvm docs generate-ri
 ```
 
 rvm [project](https://rvm.io)
 
-#### Latest Ruby version
+## Java
+
+### Maven
 
 ```bash
-rvm install ruby --latest
-```
-
-#### Ruby documentation
-
-```bash
-rvm docs generate-ri
+brew install maven
 ```
