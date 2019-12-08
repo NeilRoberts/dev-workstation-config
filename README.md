@@ -129,6 +129,12 @@ rvm docs generate-ri
 
 rvm [project](https://rvm.io)
 
+## Go
+
+```bash
+brew install go
+```
+
 ## Java
 
 ### Maven
