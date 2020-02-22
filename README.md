@@ -37,6 +37,20 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
 
+### zsh-autosuggestions
+
+After installing git (below):
+
+```bash
+# Install zsh-autosuggestions
+cd ~/.oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions
+
+# Enable zsh-autosuggestions
+nano ~/.zshrc
+# Scroll down to the plugins section and add zsh-autosuggestions to the space-separated list
+```
+
 ## Homebrew
 
 ```bash
