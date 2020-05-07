@@ -108,14 +108,14 @@ source ~/.zshrc
 pyenv install --list
 
 # Install the latest Python 3
-pyenv install 3.8.0
+pyenv install 3.8.2
 
 # Set the preferred order of Python interpreters
-pyenv global 3.8.0 system
+pyenv global 3.8.2 system
 
 # Create and activate a Python virtual environment
-pyenv virtualenv 3.8.0 sandbox-3.8.0
-pyenv activate sandbox-3.8.0
+pyenv virtualenv 3.8.2 sandbox-3.8.2
+pyenv activate sandbox-3.8.2
 ```
 
 pyenv [project](https://github.com/pyenv/pyenv)
@@ -123,6 +123,40 @@ pyenv [project](https://github.com/pyenv/pyenv)
 pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
 
 pyenv global [docs](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-global-advanced)
+
+## Java
+
+### jenv
+
+jenv [project](https://github.com/jenv/jenv)
+
+```bash
+# Install jenv to enable switching between Java versions
+brew install jenv
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(jenv init -)"' >> ~/.zshrc
+mkdir -p ~/.jenv/versions
+```
+
+### Install AdoptOpenJDK 8 & 11 and configure jenv
+
+AdoptOpenJDK [project](https://github.com/AdoptOpenJDK/homebrew-openjdk)
+
+```bash
+# Add AdoptOpenJDK as a source
+brew tap AdoptOpenJDK/openjdk
+
+# Install OpenJDK 8 and add to jenv - enter password when prompted
+brew cask install adoptopenjdk8
+jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+
+# Install OpenJDK 11 and add to jenv - enter password when prompted
+brew cask install adoptopenjdk11
+jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+
+# Set a global Java version - takes effect on new shell
+jenv global 1.8
+```
 
 ## Ruby
 
