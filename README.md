@@ -158,6 +158,16 @@ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
 jenv global 1.8
 ```
 
+### Install Maven & enable the jenv plugin
+
+```bash
+# Install Maven
+brew install maven
+
+# Install the Maven plugin for jenv
+jenv enable-plugin maven
+```
+
 ## Ruby
 
 ```bash
@@ -181,12 +191,4 @@ rvm [project](https://rvm.io)
 
 ```bash
 brew install go
-```
-
-## Java
-
-### Maven
-
-```bash
-brew install maven
 ```
