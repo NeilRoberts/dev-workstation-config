@@ -234,7 +234,7 @@ As of the most recent update to this file, OpenJDK builds for Apple Silicon are 
 
 ### Install Zulu OpenJDK 11 and configure jenv
 
-Download the Java 11 for ARMv8 installer from the Zulu OpenJDK [project](hhttps://www.azul.com/downloads/zulu-community/?os=macos&package=jdk). Mount the .dmg and run the installer package.
+Download the Java 11 for ARMv8 installer from the Zulu OpenJDK [project](https://www.azul.com/downloads/zulu-community/?os=macos&package=jdk). Mount the .dmg and run the installer package.
 
 ```bash
 # Add OpenJDK 11 to jenv - enter password when prompted
