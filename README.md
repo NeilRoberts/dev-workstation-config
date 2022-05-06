@@ -2,9 +2,9 @@
 
 ## Overview
 
-This documents the applications and tools that I've installed on my Macs for software development. The steps are mostly in order, but YMMV. These instructions should work on both macOS Catalina 10.15.x and macOS Big Sur 11.x, but I've only checked them recently on Big Sur.
+This documents the applications and tools that I've installed on my Macs for software development. The steps are mostly in order, but YMMV.
 
-## Big Sur notes
+## Monterey notes
 
 ### System Settings
 
@@ -13,20 +13,21 @@ This documents the applications and tools that I've installed on my Macs for sof
 - Increase cursor size by one step
 - Enable three-finger drag
 
-### macOS Big Sur 11.1 Base Install Tool Versions
+### macOS Monterey 12.0.1 Base Install Tool Versions
 
-| Tool     | Command               | Version  | Notes                                                           |
-| -------- | --------------------- | -------- | --------------------------------------------------------------- |
-| Git      | `git`                 | N/A      | Exists in `/usr/bin` but requires Xcode CLT                     |
-| Perl     | `perl`                | 5.28.2   | 5.18.4 (`perl5.18`) and 5.30..2 (`perl5.30`) are also installed |
-| PHP      | `php`                 | 7.3.24   | "Not recommended" - will be removed in future macOS             |
-| Python 2 | `python` or `python2` | 2.7.16   |                                                                 |
-| Python 3 | `python3`             | N/A      | Exists in `/usr/bin` but requires Xcode CLT                     |
-| Ruby     | `ruby`                | 2.6.3p62 |                                                                 |
+| Tool     | Command               | Version   | Notes                                                           |
+| -------- | --------------------- | --------- | --------------------------------------------------------------- |
+| Git      | `git`                 | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
+| Perl     | `perl`                | 5.30.3    | 5.18.4 (`perl5.18`) is also installed                           |
+| PHP      | `php`                 | N/A       | Not installed                                                   |
+| Python 2 | `python` or `python2` | 2.7.18    |                                                                 |
+| Python 3 | `python3`             | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
+| Pip 3    | `pip3`                | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
+| Ruby     | `ruby`                | 2.6.8p205 |                                                                 |
 
 ## Xcode Command Line Tools - if Xcode is unnecessary or inaccessible
 
-Install the Xcode Command Line Tools. When prompted, choose Install and Agree to the license agreement.
+Install the Xcode Command Line Tools. When prompted, choose Install and Agree to the license agreement. **Apple Silicon:** if prompted to install Rosetta, do it.
 
 ```sh
 xcode-select --install
@@ -66,7 +67,7 @@ nano ~/.zshrc
 # Save, exit, and open a new terminal window for changes to take effect
 ```
 
-oh-my-zsh [project](https://github.com/robbyrussell/oh-my-zsh_)
+oh-my-zsh [project](https://github.com/ohmyzsh/ohmyzsh)
 
 ## SSH Key Pair
 
@@ -89,6 +90,12 @@ Install Homebrew. When prompted, enter your administrator password and press Ent
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Add Homebrew to PATH
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+
+# Activate Homebrew in current terminal
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 Homebrew [project](https://brew.sh)
@@ -107,6 +114,16 @@ git config --global user.name "Firstname Lastname"
 git config --global user.email your_email@host.tld
 ```
 
+## Useful Apps
+
+```sh
+# Alfred
+brew install alfred
+
+# Rectangle window manager
+brew install rectangle
+```
+
 ## Docker Desktop Community
 
 As of the most recent update to this file, Docker Desktop for Apple Silicon Macs was in technical preview. The installer can be downloaded [here](https://docs.docker.com/docker-for-mac/apple-m1/).
@@ -121,16 +138,18 @@ Download [VS Code](https://code.visualstudio.com/Download) and extract it to `/A
 
 Useful extensions:
 
-* Docker (ms-azuretools.vscode-docker)
-* Dracula Official theme (dracula-theme.theme-dracula)
-* Git History (donjayamanne.githistory)
-* GitLens (eamodio.gitlens)
-* Go (ms-vscode.go)
-* Markdown All in One (yzhang.markdown-all-in-one)
-* markdownlint (davidanson.vscode-markdownlint)
-* PostgreSQL (ckolkman.vscode-postgres)
-* Python (ms-python.python)
-* Transformer (dakara.transformer)
+- AREPL for Python (almenon.arepl)
+- Docker (ms-azuretools.vscode-docker)
+- Dracula Official theme (dracula-theme.theme-dracula)
+- Git History (donjayamanne.githistory)
+- GitLens (eamodio.gitlens)
+- Go (ms-vscode.go)
+- Markdown All in One (yzhang.markdown-all-in-one)
+- markdownlint (davidanson.vscode-markdownlint)
+- PostgreSQL (ckolkman.vscode-postgres)
+- Python (ms-python.python)
+- Rust (rust-lang.rust)
+- Transformer (dakara.transformer)
 
 Follow the [instructions](https://draculatheme.com/visual-studio-code/) to activate the theme in VS Code
 
@@ -141,6 +160,7 @@ Follow the [instructions](https://draculatheme.com/visual-studio-code/) to activ
 brew install pyenv pyenv-virtualenv
 
 # Configure pyenv and pyenv-virtualenv
+echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 source ~/.zshrc
@@ -149,10 +169,10 @@ source ~/.zshrc
 pyenv install --list
 
 # Install the latest Python 3
-pyenv install 3.9.1
+pyenv install 3.10.3
 
 # Set the preferred order of Python interpreters
-pyenv global 3.9.1 system
+pyenv global 3.10.3 system
 
 # Create and activate a Python virtual environment
 pyenv virtualenv 3.9.1 sandbox-3.9.1
@@ -164,6 +184,55 @@ pyenv [project](https://github.com/pyenv/pyenv)
 pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
 
 pyenv global [docs](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-global-advanced)
+
+## Node.js
+
+```sh
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+# Configure installation and activate nvm
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+echo '[ -s "$NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc
+echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ~/.zshrc
+source ~/.zshrc
+
+# Install the latest LTS version of Node
+nvm install --lts
+
+# Upgrade to the latest version of NPM
+nvm install-latest-npm
+
+# Install the latest stable version of Node
+nvm install node
+
+# Upgrade to the latest version of NPM
+nvm install-latest-npm
+
+# Set the default version to the latest stable version of Node
+nvm alias default node
+```
+
+nvm [project](https://github.com/nvm-sh/nvm)
+
+## Go
+
+```sh
+brew install go
+
+# Configure installation
+mkdir $HOME/go
+echo 'export GOPATH=$HOME/go' >> ~/.zshrc
+echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.zshrc
+```
+
+## Rust
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Rust [project](https://www.rust-lang.org)
 
 ## Ruby
 
@@ -188,33 +257,6 @@ rvm docs generate-ri
 **WARNING: Ruby 2.7 made breaking changes - be cautious**
 
 rvm [project](https://rvm.io)
-
-## Node.js
-
-```sh
-# Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-
-# Configure installation and activate nvm
-echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
-echo '[ -s "$NVM_DIR/nvm.sh ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc
-echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ~/.zshrc
-source ~/.zshrc
-
-# List the available Node.js versions
-nvm ls-remote
-
-# Install the latest Node.js 14.x (Fermiun)
-nvm install lts/fermium
-```
-
-nvm [project](https://github.com/nvm-sh/nvm)
-
-## Go
-
-```sh
-brew install go
-```
 
 ## Java
 
