@@ -1,5 +1,34 @@
 # macOS Dev Workstation Configuration
 
+- [macOS Dev Workstation Configuration](#macos-dev-workstation-configuration)
+  - [Overview](#overview)
+  - [Monterey notes](#monterey-notes)
+    - [System Settings](#system-settings)
+    - [macOS Monterey 12.0.1 Base Install Tool Versions](#macos-monterey-1201-base-install-tool-versions)
+  - [Xcode Command Line Tools - if Xcode is unnecessary or inaccessible](#xcode-command-line-tools---if-xcode-is-unnecessary-or-inaccessible)
+  - [Xcode](#xcode)
+  - [Alfred](#alfred)
+  - [Rectangle](#rectangle)
+  - [iTerm 2](#iterm-2)
+    - [Dracula Theme for iTerm](#dracula-theme-for-iterm)
+  - [Oh My Zsh](#oh-my-zsh)
+  - [SSH Key Pair](#ssh-key-pair)
+  - [Homebrew](#homebrew)
+  - [git](#git)
+  - [Docker Desktop Community](#docker-desktop-community)
+  - [Visual Studio Code](#visual-studio-code)
+  - [Python](#python)
+  - [Node.js](#nodejs)
+  - [Go](#go)
+  - [Rust](#rust)
+  - [Ruby](#ruby)
+  - [Java](#java)
+    - [jenv](#jenv)
+    - [SDKMAN](#sdkman)
+    - [Install Temurin 11 and configure jenv](#install-temurin-11-and-configure-jenv)
+    - [Install Maven & enable the jenv plugin](#install-maven--enable-the-jenv-plugin)
+  - [IntelliJ](#intellij)
+
 ## Overview
 
 This documents the applications and tools that I've installed on my Macs for software development. The steps are mostly in order, but YMMV.
@@ -36,6 +65,19 @@ xcode-select --install
 ## Xcode
 
 Install Xcode from the Mac App Store. Launch, agree to the license agreement and enter password when prompted.
+
+## Alfred
+
+Download [Alfred](https://www.alfredapp.com), mount the DMG, and copy the application to
+`/Applications`. Launch, follow the steps to complete the setup, and configure the hotkey (`ctrl`
+double tap) and appearance (Alfred macOS Dark, Options: hide menu bar icon, use native macOS Dark
+Mode window rendering).
+
+## Rectangle
+
+Download [Rectangle](https://rectangleapp.com), mount the DMG, and copy the application to
+`/Applications`. Launch, follow the prompts to enable Accessibility, and select default
+shortcuts/behavior (Recommended).
 
 ## iTerm 2
 
@@ -112,16 +154,6 @@ git config --global core.excludesfile ~/.gitignore_global
 # User info
 git config --global user.name "Firstname Lastname"
 git config --global user.email your_email@host.tld
-```
-
-## Useful Apps
-
-```sh
-# Alfred
-brew install alfred
-
-# Rectangle window manager
-brew install rectangle
 ```
 
 ## Docker Desktop Community
@@ -272,39 +304,42 @@ mkdir -p ~/.jenv/versions
 
 jenv [project](https://github.com/jenv/jenv)
 
-As of the most recent update to this file, OpenJDK builds for Apple Silicon are available from Azul, but not AdoptOpenJDK.
-
-### Install Zulu OpenJDK 11 and configure jenv
-
-Download the Java 11 for ARMv8 installer from the Zulu OpenJDK [project](https://www.azul.com/downloads/zulu-community/?os=macos&package=jdk). Mount the .dmg and run the installer package.
-
-```bash
-# Add OpenJDK 11 to jenv - enter password when prompted
-jenv add /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
-
-# Set a global Java version - takes effect on new shell
-jenv global 11
-```
-
-### Install AdoptOpenJDK 8 & 11 and configure jenv
+### SDKMAN
 
 ```sh
-# Add AdoptOpenJDK as a source
-brew tap AdoptOpenJDK/openjdk
+# Install SDKMAN!
+curl -s "https://get.sdkman.io" | bash
 
-# Install OpenJDK 8 and add to jenv - enter password when prompted
-brew cask install adoptopenjdk8
-jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+# Restrict installable JDKs to Apple Silicon native versions
+nano ~/.sdkman/etc/config
 
-# Install OpenJDK 11 and add to jenv - enter password when prompted
-brew cask install adoptopenjdk11
-jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+# If Rosetta2 compatibility is set to true, change it to false
+sdkman_rosetta2_compatible=false
 
-# Set a global Java version - takes effect on new shell
-jenv global 11
+# Save the file and restart the terminal for changes to takes effect
 ```
 
-AdoptOpenJDK [project](https://github.com/AdoptOpenJDK/homebrew-openjdk)
+SDKMAN! [project](https://sdkman.io)
+
+As of the most recent update to this file, OpenJDK builds for Apple Silicon are available from Azul, but not AdoptOpenJDK.
+
+### Install Temurin 11 and configure jenv
+
+AdoptOpenJDK became part of the Eclipse Foundation and rebranded as Adoptium. Their OpenJDK releases are branded as Temurin.
+
+```sh
+# List the available JDKs
+sdk list java
+
+# Install Temurin 11 and add to jenv - enter password if prompted
+sdk install java 11.0.15-tem
+jenv add ~/.sdkman/candidates/java/11.0.15-tem
+
+# Set a global Java version - takes effect on new shell
+jenv global 11.0
+```
+
+Adoptium [Temurin 11 releases](https://adoptium.net/temurin/releases/?version=11)
 
 ### Install Maven & enable the jenv plugin
 
@@ -315,6 +350,8 @@ brew install maven
 # Install the Maven plugin for jenv
 jenv enable-plugin maven
 ```
+
+Maven [project](https://maven.apache.org)
 
 ## IntelliJ
 
