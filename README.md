@@ -2,9 +2,7 @@
 
 - [macOS Dev Workstation Configuration](#macos-dev-workstation-configuration)
   - [Overview](#overview)
-  - [Monterey notes](#monterey-notes)
-    - [System Settings](#system-settings)
-    - [macOS Monterey 12.0.1 Base Install Tool Versions](#macos-monterey-1201-base-install-tool-versions)
+  - [macOS System Settings](#macos-system-settings)
   - [Xcode Command Line Tools - if Xcode is unnecessary or inaccessible](#xcode-command-line-tools---if-xcode-is-unnecessary-or-inaccessible)
   - [Xcode](#xcode)
   - [Alfred](#alfred)
@@ -15,7 +13,8 @@
   - [SSH Key Pair](#ssh-key-pair)
   - [Homebrew](#homebrew)
   - [git](#git)
-  - [Docker Desktop Community](#docker-desktop-community)
+  - [Docker Desktop](#docker-desktop)
+  - [Kubernetes](#kubernetes)
   - [Visual Studio Code](#visual-studio-code)
   - [Python](#python)
   - [Node.js](#nodejs)
@@ -27,32 +26,17 @@
     - [SDKMAN](#sdkman)
     - [Install Temurin 11 and configure jenv](#install-temurin-11-and-configure-jenv)
     - [Install Maven & enable the jenv plugin](#install-maven--enable-the-jenv-plugin)
-  - [IntelliJ](#intellij)
 
 ## Overview
 
 This documents the applications and tools that I've installed on my Macs for software development. The steps are mostly in order, but YMMV.
 
-## Monterey notes
-
-### System Settings
+## macOS System Settings
 
 - Enable tap to click
 - Increase tracking speed
 - Increase cursor size by one step
 - Enable three-finger drag
-
-### macOS Monterey 12.0.1 Base Install Tool Versions
-
-| Tool     | Command               | Version   | Notes                                                           |
-| -------- | --------------------- | --------- | --------------------------------------------------------------- |
-| Git      | `git`                 | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
-| Perl     | `perl`                | 5.30.3    | 5.18.4 (`perl5.18`) is also installed                           |
-| PHP      | `php`                 | N/A       | Not installed                                                   |
-| Python 2 | `python` or `python2` | 2.7.18    |                                                                 |
-| Python 3 | `python3`             | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
-| Pip 3    | `pip3`                | N/A       | Exists in `/usr/bin` but requires Xcode CLT                     |
-| Ruby     | `ruby`                | 2.6.8p205 |                                                                 |
 
 ## Xcode Command Line Tools - if Xcode is unnecessary or inaccessible
 
@@ -68,16 +52,11 @@ Install Xcode from the Mac App Store. Launch, agree to the license agreement and
 
 ## Alfred
 
-Download [Alfred](https://www.alfredapp.com), mount the DMG, and copy the application to
-`/Applications`. Launch, follow the steps to complete the setup, and configure the hotkey (`ctrl`
-double tap) and appearance (Alfred macOS Dark, Options: hide menu bar icon, use native macOS Dark
-Mode window rendering).
+Download [Alfred](https://www.alfredapp.com), mount the DMG, and copy the application to `/Applications`. Launch, follow the steps to complete the setup, and configure the hotkey (`ctrl` double tap) and appearance (Alfred macOS Dark, Options: hide menu bar icon, use native macOS Dark Mode window rendering).
 
 ## Rectangle
 
-Download [Rectangle](https://rectangleapp.com), mount the DMG, and copy the application to
-`/Applications`. Launch, follow the prompts to enable Accessibility, and select default
-shortcuts/behavior (Recommended).
+Download [Rectangle](https://rectangleapp.com), mount the DMG, and copy the application to `/Applications`. Launch, follow the prompt to enable Accessibility, and select default shortcuts/behavior (Recommended).
 
 ## iTerm 2
 
@@ -103,10 +82,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Enable zsh-autosuggestions
 cd ~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions
-
 nano ~/.zshrc
-# Scroll down to the plugins section and add zsh-autosuggestions to the space-separated list
-# Save, exit, and open a new terminal window for changes to take effect
+# Scroll down to the plugins block, add "zsh-autosuggestions" (without quotes) to the space-separated list, and save the file
+
+# Open a new shell
 ```
 
 oh-my-zsh [project](https://github.com/ohmyzsh/ohmyzsh)
@@ -156,13 +135,17 @@ git config --global user.name "Firstname Lastname"
 git config --global user.email your_email@host.tld
 ```
 
-## Docker Desktop Community
+## Docker Desktop
 
-As of the most recent update to this file, Docker Desktop for Apple Silicon Macs was in technical preview. The installer can be downloaded [here](https://docs.docker.com/docker-for-mac/apple-m1/).
+Download [Docker Desktop](https://docs.docker.com/desktop/mac/install) for your CPU architecture, mount the DMG, and copy the application to `/Applications`. Launch, follow the steps to complete setup and accept the terms.
 
-For Intel-based Macs, download the latest [stable release](https://docs.docker.com/docker-for-mac/release-notes/) of Docker Desktop Community for Mac.
+## Kubernetes
 
- Mount the .dmg and copy the application to `/Applications`. Launch Docker.app to complete installation.
+Docker Desktop installs a version of `kubectl` and an engine, but `minikube` is preferred.
+
+```sh
+brew install minikube
+```
 
 ## Visual Studio Code
 
@@ -170,18 +153,19 @@ Download [VS Code](https://code.visualstudio.com/Download) and extract it to `/A
 
 Useful extensions:
 
-- AREPL for Python (almenon.arepl)
-- Docker (ms-azuretools.vscode-docker)
-- Dracula Official theme (dracula-theme.theme-dracula)
-- Git History (donjayamanne.githistory)
-- GitLens (eamodio.gitlens)
-- Go (ms-vscode.go)
-- Markdown All in One (yzhang.markdown-all-in-one)
-- markdownlint (davidanson.vscode-markdownlint)
-- PostgreSQL (ckolkman.vscode-postgres)
-- Python (ms-python.python)
-- Rust (rust-lang.rust)
-- Transformer (dakara.transformer)
+- Docker (`ms-azuretools.vscode-docker`)
+- Dracula Official theme (`dracula-theme.theme-dracula`)
+- Git Graph (`mhutchie.git-graph`)
+- Git History (`donjayamanne.githistory`)
+- GitLens (`eamodio.gitlens`)
+- Kubernetes (`ms-kubernetes-tools.vscode-kubernetes-tools`)
+- Markdown All in One (`yzhang.markdown-all-in-one`)
+- markdownlint (`davidanson.vscode-markdownlint`)
+- PostgreSQL (`ckolkman.vscode-postgres`)
+- Transformer (`dakara.transformer`)
+- XML (`redhat.vscode-xml`)
+- XML Tools (`dotjoshjohnson.xml`)
+- YAML by RedHat (`redhat.vscode-yaml`)
 
 Follow the [instructions](https://draculatheme.com/visual-studio-code/) to activate the theme in VS Code
 
@@ -206,9 +190,18 @@ pyenv install 3.10.3
 # Set the preferred order of Python interpreters
 pyenv global 3.10.3 system
 
-# Create and activate a Python virtual environment
-pyenv virtualenv 3.9.1 sandbox-3.9.1
-pyenv activate sandbox-3.9.1
+# Open a new shell
+
+# Example:
+# Create an "aws" virtualenv and activate it
+pyenv virtualenv 3.10.3 aws-3.10.3
+pyenv activate aws-3.10.3
+
+# Install some useful modules into the virtualenv
+pip install awscli awscli-local
+
+# Deactivate the virtualenv
+pyenv deactivate
 ```
 
 pyenv [project](https://github.com/pyenv/pyenv)
@@ -217,11 +210,16 @@ pyenv-virtualenv [project](https://github.com/pyenv/pyenv-virtualenv)
 
 pyenv global [docs](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-global-advanced)
 
+Useful VS Code extensions:
+
+- AREPL for Python (`almenon.arepl`)
+- Python (`ms-python.python`)
+
 ## Node.js
 
 ```sh
 # Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 # Configure installation and activate nvm
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
@@ -247,6 +245,10 @@ nvm alias default node
 
 nvm [project](https://github.com/nvm-sh/nvm)
 
+Useful VS Code extensions:
+
+- ESLint (`dbaeumer.vscode-eslint`)
+
 ## Go
 
 ```sh
@@ -256,7 +258,15 @@ brew install go
 mkdir $HOME/go
 echo 'export GOPATH=$HOME/go' >> ~/.zshrc
 echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.zshrc
+
+# For gRPC development
+brew install bufbuild/buf/buf
 ```
+
+Useful VS Code extensions:
+
+- Buf (`bufbuild.vscode-buf`)
+- Go (`golang.go`)
 
 ## Rust
 
@@ -266,29 +276,42 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Rust [project](https://www.rust-lang.org)
 
+Useful VS Code extensions:
+
+- rust-analyzer (`rust-lang.rust-analyzer`)
+
 ## Ruby
 
 ```sh
-# Install rvm
-curl -sSL https://get.rvm.io | bash -s stable
+# Install latest rvm to get access to newer Rubies - may prompt for password if Ruby must be built from source
+curl -sSL https://get.rvm.io | bash -s master
 source ~/.rvm/scripts/rvm
+
+# Install the supporting package first
+brew instal shared-mime-info
 
 # List the available Ruby versions
 rvm list known
 
-# Install Ruby 2.6
-rvm install 2.6
-
-# On Apple Silicon:
-CFLAGS="-Wno-error=implicit-function-declaration" rvm install 2.6
-
-# Install Ruby documentation
+# Install Ruby 3.1 and documentation
+rvm install ruby-3.1
 rvm docs generate-ri
+
+# Update the bundle gem and Ruby debug helper globally
+gem install bundler
+gem install debug
+
+# Set the default Ruby version
+rvm --default use 3.1
 ```
 
-**WARNING: Ruby 2.7 made breaking changes - be cautious**
-
 rvm [project](https://rvm.io)
+
+Useful VS Code extensions:
+
+- Cucumber (`cucumberopen.cucumber-official`)
+- Ruby (`rebornix.ruby`)
+- VSCode Ruby (`wingrunr21.vscode-ruby`)
 
 ## Java
 
@@ -321,11 +344,11 @@ sdkman_rosetta2_compatible=false
 
 SDKMAN! [project](https://sdkman.io)
 
-As of the most recent update to this file, OpenJDK builds for Apple Silicon are available from Azul, but not AdoptOpenJDK.
-
 ### Install Temurin 11 and configure jenv
 
-AdoptOpenJDK became part of the Eclipse Foundation and rebranded as Adoptium. Their OpenJDK releases are branded as Temurin.
+AdoptOpenJDK [became part of the Eclipse Foundation][eclipse-transition] and rebranded as Adoptium. Their OpenJDK releases are branded as Temurin.
+
+[eclipse-transition]: https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/
 
 ```sh
 # List the available JDKs
@@ -337,9 +360,12 @@ jenv add ~/.sdkman/candidates/java/11.0.15-tem
 
 # Set a global Java version - takes effect on new shell
 jenv global 11.0
+
+# Reload zsh configs
+source ~/.zshrc
 ```
 
-Adoptium [Temurin 11 releases](https://adoptium.net/temurin/releases/?version=11)
+Temurin 11 [releases](https://adoptium.net/temurin/releases/?version=11)
 
 ### Install Maven & enable the jenv plugin
 
@@ -353,6 +379,6 @@ jenv enable-plugin maven
 
 Maven [project](https://maven.apache.org)
 
-## IntelliJ
+Useful VS Code extensions:
 
-[Download](https://www.jetbrains.com/idea/download) the IntelliJ IDEA Community Edition installer for your Mac's architecture . Mount the .dmg and copy the application to `/Applications`.
+- Extension Pack for Java (`vscjava.vscode-java-pack`)
