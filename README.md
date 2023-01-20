@@ -16,6 +16,7 @@
   - [Docker Desktop](#docker-desktop)
   - [Kubernetes](#kubernetes)
   - [Visual Studio Code](#visual-studio-code)
+  - [Boost Note - Local](#boost-note---local)
   - [Python](#python)
   - [Node.js](#nodejs)
   - [Go](#go)
@@ -25,7 +26,7 @@
     - [jenv](#jenv)
     - [SDKMAN](#sdkman)
     - [Install Temurin 11 and configure jenv](#install-temurin-11-and-configure-jenv)
-    - [Install Maven & enable the jenv plugin](#install-maven--enable-the-jenv-plugin)
+    - [Install Maven and enable the jenv plugin](#install-maven-and-enable-the-jenv-plugin)
 
 ## Overview
 
@@ -162,12 +163,17 @@ Useful extensions:
 - Markdown All in One (`yzhang.markdown-all-in-one`)
 - markdownlint (`davidanson.vscode-markdownlint`)
 - PostgreSQL (`ckolkman.vscode-postgres`)
+- Thunder Client (`rangav.vscode-thunder-client`)
 - Transformer (`dakara.transformer`)
 - XML (`redhat.vscode-xml`)
 - XML Tools (`dotjoshjohnson.xml`)
 - YAML by RedHat (`redhat.vscode-yaml`)
 
 Follow the [instructions](https://draculatheme.com/visual-studio-code/) to activate the theme in VS Code
+
+## Boost Note - Local
+
+Download [Boost Note - Local](https://github.com/BoostIO/BoostNote.next-local/releases), mount the DMG, and copy the application to `/Applications`.
 
 ## Python
 
@@ -367,7 +373,7 @@ source ~/.zshrc
 
 Temurin 11 [releases](https://adoptium.net/temurin/releases/?version=11)
 
-### Install Maven & enable the jenv plugin
+### Install Maven and enable the jenv plugin
 
 ```sh
 # Install Maven
