@@ -361,17 +361,17 @@ AdoptOpenJDK [became part of the Eclipse Foundation][eclipse-transition] and reb
 sdk list java
 
 # Install Temurin 11 and add to jenv - enter password if prompted
-sdk install java 11.0.15-tem
-jenv add ~/.sdkman/candidates/java/11.0.15-tem
+sdk install java 17.0.8-tem
+jenv add ~/.sdkman/candidates/java/17.0.8-tem
 
 # Set a global Java version - takes effect on new shell
-jenv global 11.0
+jenv global 17.0
 
 # Reload zsh configs
 source ~/.zshrc
 ```
 
-Temurin 11 [releases](https://adoptium.net/temurin/releases/?version=11)
+Temurin 17 [releases](https://adoptium.net/temurin/releases/?version=17)
 
 ### Install Maven and enable the jenv plugin
 
