@@ -160,6 +160,7 @@ Useful extensions:
 - Git History (`donjayamanne.githistory`)
 - GitLens (`eamodio.gitlens`)
 - Kubernetes (`ms-kubernetes-tools.vscode-kubernetes-tools`)
+- Makefile Tools (`ms-vscode.makefile-tools`)
 - Markdown All in One (`yzhang.markdown-all-in-one`)
 - markdownlint (`davidanson.vscode-markdownlint`)
 - PostgreSQL (`ckolkman.vscode-postgres`)
@@ -282,9 +283,17 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Rust [project](https://www.rust-lang.org)
 
+rustup [installer](https://rustup.rs)
+
 Useful VS Code extensions:
 
 - rust-analyzer (`rust-lang.rust-analyzer`)
+
+Embedded-specific VS Code extensions:
+
+- Arm Embedded Debugger (`arm.embedded-debug`)
+- Cortex-Debug (`marus25.cortex-debug`)
+- Embedded Tools (`ms-vscode.vscode-embedded-tools`)
 
 ## Ruby
 
