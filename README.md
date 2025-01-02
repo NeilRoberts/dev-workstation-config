@@ -21,6 +21,7 @@
   - [Node.js](#nodejs)
   - [Go](#go)
   - [Rust](#rust)
+    - [Embedded Dev](#embedded-dev)
   - [Ruby](#ruby)
   - [Java](#java)
     - [jenv](#jenv)
@@ -289,6 +290,14 @@ Useful VS Code extensions:
 
 - rust-analyzer (`rust-lang.rust-analyzer`)
 
+### Embedded Dev
+
+```sh
+brew install openocd
+brew install arm-none-eabi-gdb
+brew install arm-none-eabi-binutils
+```
+
 Embedded-specific VS Code extensions:
 
 - Arm Embedded Debugger (`arm.embedded-debug`)
@@ -325,8 +334,7 @@ rvm [project](https://rvm.io)
 Useful VS Code extensions:
 
 - Cucumber (`cucumberopen.cucumber-official`)
-- Ruby (`rebornix.ruby`)
-- VSCode Ruby (`wingrunr21.vscode-ruby`)
+- RubyLSP (`shopify.ruby-lsp`)
 
 ## Java
 
