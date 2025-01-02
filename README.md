@@ -193,10 +193,10 @@ source ~/.zshrc
 pyenv install --list
 
 # Install the latest Python 3
-pyenv install 3.10.3
+pyenv install 3
 
-# Set the preferred order of Python interpreters
-pyenv global 3.10.3 system
+# Set the preferred order of Python interpreters - in this case, latest first
+pyenv global 3 system
 
 # Open a new shell
 
