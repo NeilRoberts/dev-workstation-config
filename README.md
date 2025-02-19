@@ -132,9 +132,14 @@ brew install git
 echo ".DS_Store" >> ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global
 
-# User info
+# Configure user settings
 git config --global user.name "Firstname Lastname"
-git config --global user.email your_email@host.tld
+git config --global user.email "your_email@host.tld"
+git config --global pull.ff only
+git config --global push.autoSetupRemote true
+
+# Configure SSH override for GitHub
+git config --global --add url."git@github.com:"insteadOf "https://github.com"
 ```
 
 ## Docker Desktop
