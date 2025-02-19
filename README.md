@@ -181,11 +181,12 @@ Download [Boost Note - Local](https://github.com/BoostIO/BoostNote.next-local/re
 
 ```sh
 # Install pyenv and pyenv-virtualenv
-brew install pyenv pyenv-virtualenv
+brew install xz pyenv pyenv-virtualenv
 
 # Configure pyenv and pyenv-virtualenv
-echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
-echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 source ~/.zshrc
 
